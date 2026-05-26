@@ -34,7 +34,10 @@
             }
 
             .playlist {
-                max-width: 800px;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 20px;
+                max-width: 850px;
                 margin: 40px auto;
                 padding: 20px;
             }
@@ -77,6 +80,57 @@
                 loading="lazy"
             >
             </iframe>
+            <iframe
+                data-testid="embed-iframe"
+                style="border-radius: 12px"
+                src="https://open.spotify.com/embed/playlist/4kfsjg1lK8PiLvMmePhl1X?utm_source=generator&theme=0"
+                width="100%"
+                height="352"
+                frameborder="0"
+                allowfullscreen=""
+                allow="
+                    autoplay;
+                    clipboard-write;
+                    encrypted-media;
+                    fullscreen;
+                    picture-in-picture;
+                "
+                loading="lazy"
+            ></iframe>
+            <iframe
+                data-testid="embed-iframe"
+                style="border-radius: 12px"
+                src="https://open.spotify.com/embed/playlist/55iO1xckpCLzMllHKxOQco?utm_source=generator&theme=0"
+                width="100%"
+                height="352"
+                frameborder="0"
+                allowfullscreen=""
+                allow="
+                    autoplay;
+                    clipboard-write;
+                    encrypted-media;
+                    fullscreen;
+                    picture-in-picture;
+                "
+                loading="lazy"
+            ></iframe>
+            <iframe
+                data-testid="embed-iframe"
+                style="border-radius: 12px"
+                src="https://open.spotify.com/embed/playlist/2u58u3EOZG81rbCBCI5bjw?utm_source=generator"
+                width="100%"
+                height="352"
+                frameborder="0"
+                allowfullscreen=""
+                allow="
+                    autoplay;
+                    clipboard-write;
+                    encrypted-media;
+                    fullscreen;
+                    picture-in-picture;
+                "
+                loading="lazy"
+            ></iframe>
         </section>
 
         <div class="footer">© 2026 ZenSounds</div>
