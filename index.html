@@ -3,72 +3,178 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>My Music</title>
+        <title>ZenSounds - Atmospheric Music</title>
+
+        <!-- 1. Tipografie Modernă (Google Fonts) -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+            rel="stylesheet"
+        />
 
         <style>
+            /* 6. Fundal Animat Subtil */
+            @keyframes gradientBG {
+                0% {
+                    background-position: 0% 50%;
+                }
+                50% {
+                    background-position: 100% 50%;
+                }
+                100% {
+                    background-position: 0% 50%;
+                }
+            }
+
             body {
                 margin: 0;
-                font-family: Arial, sans-serif;
+                font-family: "Poppins", sans-serif; /* 1. Tipografie Modernă */
                 background: linear-gradient(
-                    to right,
-                    #079c79 0%,
-                    #045e49 50%,
-                    #079c79 100%
+                    -45deg,
+                    #079c79,
+                    #045e49,
+                    #033d30,
+                    #079c79
                 );
+                background-size: 400% 400%;
+                animation: gradientBG 15s ease infinite;
                 background-attachment: fixed;
                 color: white;
                 text-align: center;
+                overflow-x: hidden;
             }
 
+            /* 2. Efect de Glassmorphism */
             .hero {
-                padding: 80px 20px 40px;
+                padding: 100px 20px 60px;
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(10px);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                margin-bottom: 40px;
             }
 
             h1 {
-                font-size: 48px;
+                font-size: 64px;
+                font-weight: 600;
                 margin-bottom: 10px;
-                color: white;
-                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+                letter-spacing: -1px;
+                text-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             }
 
-            p {
-                color: #b3b3b3;
+            .hero p {
+                font-size: 18px;
+                color: rgba(255, 255, 255, 0.8);
                 max-width: 600px;
                 margin: auto;
-                color: white;
-                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
             }
 
-            a {
+            .hero a {
+                color: #00ffc3;
+                text-decoration: none;
+                font-weight: 600;
+                transition: color 0.3s;
+            }
+
+            .hero a:hover {
                 color: white;
             }
 
-            .playlist {
+            /* 3. Organizare și Titluri de Secțiuni */
+            .section-title {
+                font-size: 28px;
+                font-weight: 600;
+                margin: 60px 0 20px;
+                position: relative;
+                display: inline-block;
+            }
+
+            .section-title::after {
+                content: "";
+                position: absolute;
+                bottom: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 50px;
+                height: 3px;
+                background: #00ffc3;
+                border-radius: 2px;
+            }
+
+            .container {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 20px;
-                max-width: 850px;
-                margin: 40px auto;
-                padding: 20px;
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 30px;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 40px 20px;
+            }
+
+            /* 5. Animații la Scroll */
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .fade-in {
+                animation: fadeInUp 1s ease-out forwards;
+                opacity: 0;
             }
 
             iframe {
                 width: 100%;
                 border: 2px solid white;
-                border-radius: 12px;
-                box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-                transition: transform 0.3s ease;
+                border-radius: 16px;
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+                transition:
+                    transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                    box-shadow 0.4s;
             }
 
             iframe:hover {
-                transform: scale(1.02);
+                transform: scale(1.03);
+                box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+            }
+
+            /* 4. Link-uri Social Media (YouTube) */
+            .social-links {
+                margin-top: 20px;
+            }
+
+            .social-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+                padding: 12px 24px;
+                border-radius: 30px;
+                text-decoration: none;
+                font-weight: 600;
+                backdrop-filter: blur(5px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                transition: all 0.3s;
+            }
+
+            .social-btn:hover {
+                background: #ff0000;
+                border-color: #ff0000;
+                transform: translateY(-3px);
+                box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
             }
 
             .footer {
-                padding: 40px;
-                color: white;
+                padding: 60px 40px;
+                background: rgba(0, 0, 0, 0.2);
+                margin-top: 80px;
                 font-size: 14px;
-                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+                color: rgba(255, 255, 255, 0.6);
             }
         </style>
     </head>
@@ -77,18 +183,39 @@
         <section class="hero">
             <h1>ZenSounds</h1>
             <p>
-                by
-                <a href="https://open.spotify.com/artist/2Rsw7yZnpCsrZ4h5ROv5n7"
+                Atmospheric music for focus, relaxation and cinematic moments by
+                <a
+                    href="https://open.spotify.com/artist/2Rsw7yZnpCsrZ4h5ROv5n7"
+                    target="_blank"
                     >Lucian Neacsu</a
                 >
             </p>
-            <br />
-            <p>
-                Atmospheric music for focus, relaxation and cinematic moments.
-            </p>
+
+            <!-- 4. Link-uri Social Media -->
+            <div class="social-links">
+                <a
+                    href="https://www.youtube.com/@LucianNeacsu"
+                    class="social-btn"
+                    target="_blank"
+                >
+                    <svg
+                        width="20"
+                        height="20"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                        />
+                    </svg>
+                    Subscribe on YouTube
+                </a>
+            </div>
         </section>
 
-        <section class="playlist">
+        <!-- 3. Organizare: Secțiune Playlists -->
+        <h2 class="section-title fade-in">Curated Playlists</h2>
+        <div class="container fade-in" style="animation-delay: 0.2s">
             <iframe
                 src="https://open.spotify.com/embed/playlist/18B5QENeAnTXTY5hU9lwWs?utm_source=generator"
                 height="352"
@@ -101,27 +228,9 @@
                     picture-in-picture;
                 "
                 loading="lazy"
-            >
-            </iframe>
-            <iframe
-                data-testid="embed-iframe"
-                src="https://open.spotify.com/embed/playlist/4kfsjg1lK8PiLvMmePhl1X?utm_source=generator&theme=0"
-                width="100%"
-                height="352"
-                allowfullscreen=""
-                allow="
-                    autoplay;
-                    clipboard-write;
-                    encrypted-media;
-                    fullscreen;
-                    picture-in-picture;
-                "
-                loading="lazy"
             ></iframe>
             <iframe
-                data-testid="embed-iframe"
                 src="https://open.spotify.com/embed/playlist/55iO1xckpCLzMllHKxOQco?utm_source=generator&theme=0"
-                width="100%"
                 height="352"
                 allowfullscreen=""
                 allow="
@@ -134,9 +243,7 @@
                 loading="lazy"
             ></iframe>
             <iframe
-                data-testid="embed-iframe"
                 src="https://open.spotify.com/embed/playlist/2u58u3EOZG81rbCBCI5bjw?utm_source=generator"
-                width="100%"
                 height="352"
                 allowfullscreen=""
                 allow="
@@ -148,10 +255,15 @@
                 "
                 loading="lazy"
             ></iframe>
+        </div>
+
+        <!-- 3. Organizare: Secțiune Albume -->
+        <h2 class="section-title fade-in" style="animation-delay: 0.4s">
+            Featured Albums
+        </h2>
+        <div class="container fade-in" style="animation-delay: 0.6s">
             <iframe
-                data-testid="embed-iframe"
                 src="https://open.spotify.com/embed/album/1yw8B16vIRt58WaKXvgbNM?utm_source=generator"
-                width="100%"
                 height="352"
                 allowfullscreen=""
                 allow="
@@ -164,9 +276,7 @@
                 loading="lazy"
             ></iframe>
             <iframe
-                data-testid="embed-iframe"
                 src="https://open.spotify.com/embed/album/6dWvL6tBGrmpGbZaYKcfQY?utm_source=generator"
-                width="100%"
                 height="352"
                 allowfullscreen=""
                 allow="
@@ -179,9 +289,7 @@
                 loading="lazy"
             ></iframe>
             <iframe
-                data-testid="embed-iframe"
                 src="https://open.spotify.com/embed/album/3qwSHrglSnHCt4fPtUi33b?utm_source=generator"
-                width="100%"
                 height="352"
                 allowfullscreen=""
                 allow="
@@ -194,9 +302,7 @@
                 loading="lazy"
             ></iframe>
             <iframe
-                data-testid="embed-iframe"
                 src="https://open.spotify.com/embed/album/7JwBSNwDd1JkbKeY2svJDg?utm_source=generator"
-                width="100%"
                 height="352"
                 allowfullscreen=""
                 allow="
@@ -209,9 +315,7 @@
                 loading="lazy"
             ></iframe>
             <iframe
-                data-testid="embed-iframe"
                 src="https://open.spotify.com/embed/album/1fLVNmvNtXVYlTPWgyeKn7?utm_source=generator"
-                width="100%"
                 height="352"
                 allowfullscreen=""
                 allow="
@@ -224,9 +328,7 @@
                 loading="lazy"
             ></iframe>
             <iframe
-                data-testid="embed-iframe"
                 src="https://open.spotify.com/embed/album/1PYyqAyT8Y5RQqPr9a8pS8?utm_source=generator"
-                width="100%"
                 height="352"
                 allowfullscreen=""
                 allow="
@@ -238,242 +340,28 @@
                 "
                 loading="lazy"
             ></iframe>
-        </section>
+        </div>
 
-        <div class="footer">© 2026 ZenSounds</div>
-    </body>
-</html>
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>My Music</title>
+        <div class="footer">© 2026 ZenSounds | Created by Lucian Neacsu</div>
 
-        <style>
-            body {
-                margin: 0;
-                font-family: Arial, sans-serif;
-                background: linear-gradient(
-                    to right,
-                    #079c79 0%,
-                    #045e49 50%,
-                    #079c79 100%
-                );
-                background-attachment: fixed;
-                color: white;
-                text-align: center;
-            }
+        <!-- Mic script pentru a declanșa animațiile la scroll dacă sunt multe elemente -->
+        <script>
+            const observerOptions = {
+                threshold: 0.1,
+            };
 
-            .hero {
-                padding: 80px 20px 40px;
-            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = "1";
+                        entry.target.classList.add("fade-in");
+                    }
+                });
+            }, observerOptions);
 
-            h1 {
-                font-size: 48px;
-                margin-bottom: 10px;
-                color: white;
-                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-            }
-
-            p {
-                color: #b3b3b3;
-                max-width: 600px;
-                margin: auto;
-                color: white;
-                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-            }
-
-            .playlist {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 20px;
-                max-width: 850px;
-                margin: 40px auto;
-                padding: 20px;
-            }
-
-            iframe {
-                width: 100%;
-                border: 2px solid white;
-                border-radius: 12px;
-                box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-                transition: transform 0.3s ease;
-            }
-
-            iframe:hover {
-                transform: scale(1.02);
-            }
-
-            .footer {
-                padding: 40px;
-                color: white;
-                font-size: 14px;
-                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-            }
-        </style>
-    </head>
-
-    <body>
-        <section class="hero">
-            <h1>ZenSounds</h1>
-            <p>
-                Atmospheric music for focus, relaxation and cinematic moments.
-            </p>
-        </section>
-
-        <section class="playlist">
-            <iframe
-                src="https://open.spotify.com/embed/playlist/18B5QENeAnTXTY5hU9lwWs?utm_source=generator"
-                height="352"
-                allowfullscreen=""
-                allow="
-                    autoplay;
-                    clipboard-write;
-                    encrypted-media;
-                    fullscreen;
-                    picture-in-picture;
-                "
-                loading="lazy"
-            >
-            </iframe>
-            <iframe
-                data-testid="embed-iframe"
-                src="https://open.spotify.com/embed/playlist/4kfsjg1lK8PiLvMmePhl1X?utm_source=generator&theme=0"
-                width="100%"
-                height="352"
-                allowfullscreen=""
-                allow="
-                    autoplay;
-                    clipboard-write;
-                    encrypted-media;
-                    fullscreen;
-                    picture-in-picture;
-                "
-                loading="lazy"
-            ></iframe>
-            <iframe
-                data-testid="embed-iframe"
-                src="https://open.spotify.com/embed/playlist/55iO1xckpCLzMllHKxOQco?utm_source=generator&theme=0"
-                width="100%"
-                height="352"
-                allowfullscreen=""
-                allow="
-                    autoplay;
-                    clipboard-write;
-                    encrypted-media;
-                    fullscreen;
-                    picture-in-picture;
-                "
-                loading="lazy"
-            ></iframe>
-            <iframe
-                data-testid="embed-iframe"
-                src="https://open.spotify.com/embed/playlist/2u58u3EOZG81rbCBCI5bjw?utm_source=generator"
-                width="100%"
-                height="352"
-                allowfullscreen=""
-                allow="
-                    autoplay;
-                    clipboard-write;
-                    encrypted-media;
-                    fullscreen;
-                    picture-in-picture;
-                "
-                loading="lazy"
-            ></iframe>
-            <iframe
-                data-testid="embed-iframe"
-                src="https://open.spotify.com/embed/album/1yw8B16vIRt58WaKXvgbNM?utm_source=generator"
-                width="100%"
-                height="352"
-                allowfullscreen=""
-                allow="
-                    autoplay;
-                    clipboard-write;
-                    encrypted-media;
-                    fullscreen;
-                    picture-in-picture;
-                "
-                loading="lazy"
-            ></iframe>
-            <iframe
-                data-testid="embed-iframe"
-                src="https://open.spotify.com/embed/album/6dWvL6tBGrmpGbZaYKcfQY?utm_source=generator"
-                width="100%"
-                height="352"
-                allowfullscreen=""
-                allow="
-                    autoplay;
-                    clipboard-write;
-                    encrypted-media;
-                    fullscreen;
-                    picture-in-picture;
-                "
-                loading="lazy"
-            ></iframe>
-            <iframe
-                data-testid="embed-iframe"
-                src="https://open.spotify.com/embed/album/3qwSHrglSnHCt4fPtUi33b?utm_source=generator"
-                width="100%"
-                height="352"
-                allowfullscreen=""
-                allow="
-                    autoplay;
-                    clipboard-write;
-                    encrypted-media;
-                    fullscreen;
-                    picture-in-picture;
-                "
-                loading="lazy"
-            ></iframe>
-            <iframe
-                data-testid="embed-iframe"
-                src="https://open.spotify.com/embed/album/7JwBSNwDd1JkbKeY2svJDg?utm_source=generator"
-                width="100%"
-                height="352"
-                allowfullscreen=""
-                allow="
-                    autoplay;
-                    clipboard-write;
-                    encrypted-media;
-                    fullscreen;
-                    picture-in-picture;
-                "
-                loading="lazy"
-            ></iframe>
-            <iframe
-                data-testid="embed-iframe"
-                src="https://open.spotify.com/embed/album/1fLVNmvNtXVYlTPWgyeKn7?utm_source=generator"
-                width="100%"
-                height="352"
-                allowfullscreen=""
-                allow="
-                    autoplay;
-                    clipboard-write;
-                    encrypted-media;
-                    fullscreen;
-                    picture-in-picture;
-                "
-                loading="lazy"
-            ></iframe>
-            <iframe
-                data-testid="embed-iframe"
-                src="https://open.spotify.com/embed/album/1PYyqAyT8Y5RQqPr9a8pS8?utm_source=generator"
-                width="100%"
-                height="352"
-                allowfullscreen=""
-                allow="
-                    autoplay;
-                    clipboard-write;
-                    encrypted-media;
-                    fullscreen;
-                    picture-in-picture;
-                "
-                loading="lazy"
-            ></iframe>
-        </section>
-
-        <div class="footer">© 2026 ZenSounds</div>
+            document
+                .querySelectorAll(".fade-in")
+                .forEach((el) => observer.observe(el));
+        </script>
     </body>
 </html>
