@@ -741,54 +741,62 @@
 
             // Share Functionality
             function toggleShareMenu() {
-                // Dacă browser-ul suportă native share (pe mobil), îl folosim direct
-                if (navigator.share) {
-                    navigator
-                        .share({
-                            title: "ZenSounds - Atmospheric Music",
-                            text: "Check out ZenSounds by Lucian Neacsu - Immersive ambient drone soundscapes.",
-                            url: window.location.href,
-                        })
-                        .catch(console.error);
-                } else {
-                    // Altfel arătăm meniul custom (desktop)
-                    document.getElementById("shareMenu").classList.toggle("active");
-                }
+                // Arătăm întotdeauna meniul custom pentru control total asupra link-urilor
+                document.getElementById("shareMenu").classList.toggle("active");
             }
 
             function shareTo(platform) {
                 const url = window.location.href;
-                const text = encodeURIComponent(
-                    "Check out ZenSounds by Lucian Neacsu - Immersive ambient drone soundscapes."
-                );
+                const text = "Check out ZenSounds by Lucian Neacsu - Immersive ambient drone soundscapes.";
+                const encodedText = encodeURIComponent(`${text} ${url}`);
                 let shareUrl = "";
+
+                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
                 switch (platform) {
                     case "whatsapp":
-                        shareUrl = `https://api.whatsapp.com/send?text=${text} ${url}`;
+                        shareUrl = isMobile 
+                            ? `whatsapp://send?text=${encodedText}` 
+                            : `https://api.whatsapp.com/send?text=${encodedText}`;
                         break;
                     case "facebook":
-                        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-                        break;
-                    case "threads":
-                        shareUrl = `https://www.threads.net/intent/post?text=${text} ${url}`;
+                        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
                         break;
                     case "instagram":
-                        // Instagram nu are share intent pe desktop, așa că copiem link-ul și deschidem IG
-                        copyLink("Link copied! Open Instagram to share.");
-                        setTimeout(() => window.open("https://www.instagram.com", "_blank"), 1000);
+                        // Instagram nu permite share direct de URL-uri din browser extern
+                        copyLink("Link copied! Open Instagram to share in Story or DM.");
+                        setTimeout(() => {
+                            window.location.href = "instagram://camera"; // Încearcă să deschidă camera IG pe mobil
+                            setTimeout(() => {
+                                if (!document.hidden) window.open("https://www.instagram.com", "_blank");
+                            }, 500);
+                        }, 1000);
                         return;
                     case "tiktok":
-                        // TikTok la fel, copiem link-ul și deschidem aplicația
                         copyLink("Link copied! Open TikTok to share.");
-                        setTimeout(() => window.open("https://www.tiktok.com", "_blank"), 1000);
+                        setTimeout(() => {
+                            window.location.href = "snssdk1233://"; // Deep link TikTok
+                            setTimeout(() => {
+                                if (!document.hidden) window.open("https://www.tiktok.com", "_blank");
+                            }, 500);
+                        }, 1000);
                         return;
+                    case "threads":
+                        shareUrl = `https://www.threads.net/intent/post?text=${encodedText}`;
+                        break;
                     case "email":
-                        shareUrl = `mailto:?subject=ZenSounds - Atmospheric Music&body=${text} ${url}`;
+                        shareUrl = `mailto:?subject=ZenSounds - Atmospheric Music&body=${encodedText}`;
                         break;
                 }
 
-                if (shareUrl) window.open(shareUrl, "_blank");
+                if (shareUrl) {
+                    // Încercăm să deschidem în fereastră nouă, dar pe mobil poate fi blocat popup-ul
+                    const newWindow = window.open(shareUrl, "_blank");
+                    if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+                        // Dacă popup-ul e blocat, folosim locația curentă
+                        window.location.href = shareUrl;
+                    }
+                }
                 document.getElementById("shareMenu").classList.remove("active");
             }
 
